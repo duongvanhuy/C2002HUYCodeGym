@@ -1,4 +1,5 @@
 let khachHangs = [];
+const key = 'database-c2002';
 let index = -1;
 let danhSachKhachHang = 'ItemsKhachHang';
 class khachHang {
@@ -11,7 +12,23 @@ class khachHang {
         this.mauXe = mauXe;
     }
 }
+function setDataLocalStorage(key, data){
+    // 4 biến mảng khách hàng thành chuỗi để lưu
+  //   let obj = JSON.stringify(data);
+    // 5 lưu chuỗi vào localStorage
+      // window.localStorage.setItem(key, obj);
+  //   hoặc có thể viết 
+  window.localStorage.setItem(key, JSON.stringify(data))
+
+}
+function getDataLocalStorage(){
+  // lấy dữ liệu từ localStorage
+  
+  // chuyễn dữ liệu từ chuỗi đó về lại mảng
+  khachHangs = JSON.parse(window.localStorage.getItem(key));
+}
 function init() {
+    if(window.localStorage.getItem('database-c2002') == null){
         let khachHang_01 = new khachHang(1, 'Huy', 972323348, 'duonghuy137@gmail.com', 'Hà Nội', 'VINFAST SA2.0');
         let khachHang_02 = new khachHang(2, 'Tiến', 973920938, 'tienVan09@gmail.com', 'TP.Hồ Chí Minh', 'VINFAST FADIL');
         let khachHang_03 = new khachHang(3, 'Long', 923242323, 'longnguyen73@gmail.com', 'TP.Hồ Chí Minh', 'VINFAST LUX 2.0');
@@ -19,10 +36,15 @@ function init() {
         let khachHang_05 = new khachHang(5, 'Toàn', 972323348, 'dinhToan19@gmail.com', 'Hà Nội', 'VINFAST LUX 2.0');
         let khachHang_06 = new khachHang(6, 'Bình', 909368750, 'BìnhLongAn@gmail.com', 'Hà Nội', 'VINFAST A2.0');
         khachHangs.push(khachHang_01, khachHang_02, khachHang_03, khachHang_04, khachHang_05, khachHang_06);
+        setDataLocalStorage(key, khachHangs);
+    }else{
+        getDataLocalStorage();
+    }
 }
 let show_01 = document.getElementById('after_run');
 //  HIỆN THỊ THÔNG TIN KHÁCH HÀNG
-function showTT(khachHangs) {
+function showTT() {
+    getDataLocalStorage()
     for (let i = 0; i < khachHangs.length; i++) {
         show_01.innerHTML += `
                 <tr> 
@@ -39,44 +61,7 @@ function showTT(khachHangs) {
                 `;
     }
 }
-//  THÊM KHACH HANG
-function addKhachHangs() {
-    //  chuyển hướng trang web
-    window.location.href = 'khachHang.html'
-    td = 1;
-    let name = document.getElementById('inputEmail3').value;
-    // định dạng tên nhập vào sẽ viết hoa các chữ cái đầu, xóa bỏ khoảng trắng
-    let myName = myFormat(name);
-    let sdt = parseInt(document.getElementById('inputPassword3').value)
-    let email = document.getElementById('inputPassword4').value;
-    let diaChi = document.getElementById('inlineFormSelectPref').value;
-    let mauXe = document.getElementById('inlineFormSelectPref2').value;
-    if (email != '' && sdt != '' && name != '') {
-        let khachang = new khachHang(td, myName, sdt, email, diaChi, mauXe);
-        // kiểm tra ID nhập vào không được trùng
-        if (index == -1) {
-            khachHangs.push(khachang);
-        }
-        else {
-            khachHangs[index].name = myName;
-            khachHangs[index].sdt = sdt;
-            khachHangs[index].email = email;
-            khachHangs[index].diaChi = diaChi;
-            khachHangs[index].mauXe = mauXe;
-            index = -1;
-            // document.getElementById('addkhachHangs').innerHTML = 'Thêm khách hàng'
-        }
-            $('#after_run tr').remove();
-            showTT(khachHangs);
-        //  ..............................................
-        // document.getElementById('name').value = '';
-        // document.getElementById('diemQT').value = 0;
-        // document.getElementById('diemThi').value = 0;
-    } else {
-        alert('Thông tin  không hợp lệ!!!')
-    }
 
-}
 // thêm khách hàng ở trang khachHang.html
 function addkhachHang() {
     td = khachHangs.length+1;
@@ -98,6 +83,7 @@ function addkhachHang() {
                 }
             }
             khachHangs.push(khachang);
+            setDataLocalStorage(key, khachHangs)
         }
         else {
             khachHangs[index].name = myName;
@@ -168,6 +154,7 @@ function removeStudent(id) {
     // students.splice(index_01, 1);
     // cách 2
     let arr = [];
+    getDataLocalStorage()
     for (let i = 0; i < khachHangs.length; i++) {
         arr.push(khachHangs[i].id);
         //    let compare = id.localeCompare(arr[i])
@@ -175,6 +162,7 @@ function removeStudent(id) {
         if (id == arr[i]) {
             let index = arr.indexOf(arr[i]);
             khachHangs.splice(index, 1);
+            setDataLocalStorage(key, khachHangs);
             break;
         }
     }
@@ -267,6 +255,7 @@ function sortABC() {
             `;
     }
 }
+
 //  update thông tin sau chỉnh sửa
 //  xây đựng danh sách sinh viên thi lại;
 // function retest() {
@@ -344,7 +333,7 @@ function sortABC() {
 function run() {
     
     init();
-    showTT(khachHangs);
+    showTT();
     //     // retest();
     //     // xepLoai();
     //     // hocBong();
