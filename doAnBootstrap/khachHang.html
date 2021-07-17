@@ -21,95 +21,129 @@
 
     <title>Document</title>
 </head>
-<body >
-    <div class="container  header">
+
+<body>
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4 ">
-                <div class="row">
-                    <label for="name"><b>Tên khách hàng</b> </label>
-                </div>
-                
-                <div class="row">
-                    <label for="email"><b>Email</b></label>
-                </div>
-                <div class="row">
-                    <label for="sdt"><b>Số điện thoại</b></label>
-                </div>
-                <div class="row">
-                    <label for="address"><b>Địa chỉ</b></label>
-                </div>
-                <div class="row">
-                    <label for="status"><b>Mẫu xe</b></label>
+            <div class="col-md-2 menager">
+                <div class="header-banner fw-bold">
+                    <div id="data_main" class="text-primary text-uppercase">Dữ liệu gốc</div>
+                    <div id="options01">
+                        <p>Kế hoạch lựa chọn nhà thầu</p>
+                        <p>Thông tin đấu thầu</p>
+                        <p>Mở đóng chấm thầu</p>
+                        <p>kết quả đấu thầu</p>
+                        <p>Các bên liên quan</p>
+                    </div>
+                    <div id="bitdata" class="text-primary text-uppercase">Thống kê bitdata</div>
+                    <div id="options02">
+                        <p>a</p>
+                        <p>b</p>
+                        <p>c</p>
+                    </div>
+                    <div id="menagerment" class="text-primary text-uppercase">Quản trị</div>
+                    <div id="options03">
+                        <p>Người dùng</p>
+                        <p>Chức năng hệ thống</p>
+                        <p>Danh mục dùng chung</p>
+                        <p>Từ khóa</p>
+                    </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="row"><input type="text" id="name" size="31"></div>
-               
-                <div class="row"><input  type="text" name="" id="email" size="31"></div>
-                <div class="row"><input  type="number" id="sdt" min="111111111" max="999999999"></div>
-                <!-- <div class="row"><input class="input_04" type="text" id="address" size="31"></div> -->
-                <div class="row">
-                    <select name="" id="address" >
-                        <option value="Hà Nội">Hà Nội</option>
-                        <option value="TP.Hồ Chí Minh">TP.Hồ Chí Minh</option>
-                    </select>
+            <div class="col-md-10 main-header">
+                <!--  chức năng  -->
+                <div class="row header">
+                    <!-- options -->
+                    <div class="col-md-4 ">
+                        <div class="row">
+                            <label for="name"><b>Tên khách hàng</b> </label>
+                        </div>
+
+                        <div class="row">
+                            <label for="email"><b>Email</b></label>
+                        </div>
+                        <div class="row">
+                            <label for="sdt"><b>Số điện thoại</b></label>
+                        </div>
+                        <div class="row">
+                            <label for="address"><b>Địa chỉ</b></label>
+                        </div>
+                        <div class="row">
+                            <label for="status"><b>Mẫu xe</b></label>
+                        </div>
+                    </div>
+                    <!-- /options -->
+                    <!-- input -->
+                    <div class="col">
+                        <div class="row"><input type="text" id="name" size="31"></div>
+                        <div class="row"><input type="text" name="" id="email" size="31"></div>
+                        <div class="row"><input type="number" id="sdt" min="111111111" max="999999999"></div>
+                        <div class="row">
+                            <select name="" id="address">
+                                <option value="Hà Nội">Hà Nội</option>
+                                <option value="TP.Hồ Chí Minh">TP.Hồ Chí Minh</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <select name="" id="status">
+                                <option value="VINFAST SA2.0">VINFAST SA2.0</option>
+                                <option value="VINFAST A2.0">VINFAST A2.0</option>
+                                <option value="VINFAST LUX 2.0">VINFAST LUX 2.0</option>
+                                <option value="VINFAST FADIL">VINFAST FADIL</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- /input -->
                 </div>
-                <!-- <div class="row"><input class="input_05" id="status" size="31"></div> -->
+
+                <div class="row" id="edit">
+                    <div class="btn btn-success" id="addkhachHangs" onclick="addkhachHang()">Thêm khách hàng</div>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
+                            data-toggle="dropdown" aria-expanded="false">
+                            Sắp xếp thông tin
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                            <li><a class="dropdown-item active" href="#" onclick="sortHeight()">Sắp xếp cao => thấp</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#" onclick="sortLow()">Sắp xếp thấp => cao</a></li>
+                            <li><a class="dropdown-item" href="#" onclick='sortABC()'>Sắp xếp theo tên</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="row">
-                    <select name="" id="status">
-                        <option value="VINFAST SA2.0">VINFAST SA2.0</option>
-                        <option value="VINFAST A2.0">VINFAST A2.0</option>
-                        <option value="VINFAST LUX 2.0">VINFAST LUX 2.0</option>
-                        <option value="VINFAST FADIL">VINFAST FADIL</option>
-                    </select>
+                    <input itemid="search" type="text" name="" id="search" onkeyup="search()"
+                        placeholder="tìm kiếm sinh viên...">
+                </div>
+                <!-- /chức năng -->
+                <!-- </form> -->
+                <div class="row  itemKhachHang">
+                    <table class="table table-sm table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>#MÃ SỐ</th>
+                                <th>HỌ TÊN</th>
+                                <th>SỐ ĐIỆN THOẠI</th>
+                                <th>EMAIL</th>
+                                <th>ĐỊA CHỈ</th>
+                                <th>MẪU XE</th>
+                                <th>CHỈNH SỬA</th>
+                                <th>XÓA</th>
+                            </tr>
+                        </thead>
+                        <tbody id="after_run">
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
-        <div class="row" id="edit">
-            <div class="btn btn-success" id="addkhachHangs" onclick="addkhachHang()">Thêm khách hàng</div>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
-                    data-toggle="dropdown" aria-expanded="false">
-                    Sắp xếp thông tin
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                    <li><a class="dropdown-item active" href="#" onclick="sortHeight()">Sắp xếp cao => thấp</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="sortLow()">Sắp xếp thấp => cao</a></li>
-                    <li><a class="dropdown-item" href="#" onclick='sortABC()'>Sắp xếp theo tên</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <input itemid="search" type="text" name="" id="search" onkeyup="search()"
-                placeholder="tìm kiếm sinh viên...">
-        </div>
 
+            <!-- <div class="container"> -->
 
-
-    </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <!-- </form> -->
-            <table class="table table-striped table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>#MÃ SỐ</th>
-                        <th>HỌ TÊN</th>
-                        <th>SỐ ĐIỆN THOẠI</th>
-                        <th>EMAIL</th>
-                        <th>ĐỊA CHỈ</th>
-                        <th>MẪU XE</th>
-                        <th>CHỈNH SỬA</th>
-                        <th>XÓA</th>
-                    </tr>
-                </thead>
-                <tbody id="after_run">
-                </tbody>
-            </table>
+            <!-- </div> -->
         </div>
     </div>
 </body>
+
 </html>
 <script src="../jscript/khachHang.js"></script>

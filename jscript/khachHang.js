@@ -1,4 +1,5 @@
 let khachHangs = [];
+let ketQuaCheckEmail;
 const key = 'database-c2002';
 let index = -1;
 let danhSachKhachHang = 'ItemsKhachHang';
@@ -12,23 +13,23 @@ class khachHang {
         this.mauXe = mauXe;
     }
 }
-function setDataLocalStorage(key, data){
+function setDataLocalStorage(key, data) {
     // 4 biến mảng khách hàng thành chuỗi để lưu
-  //   let obj = JSON.stringify(data);
+    //   let obj = JSON.stringify(data);
     // 5 lưu chuỗi vào localStorage
-      // window.localStorage.setItem(key, obj);
-  //   hoặc có thể viết 
-  window.localStorage.setItem(key, JSON.stringify(data))
+    // window.localStorage.setItem(key, obj);
+    //   hoặc có thể viết 
+    window.localStorage.setItem(key, JSON.stringify(data))
 
 }
-function getDataLocalStorage(){
-  // lấy dữ liệu từ localStorage
-  
-  // chuyễn dữ liệu từ chuỗi đó về lại mảng
-  khachHangs = JSON.parse(window.localStorage.getItem(key));
+function getDataLocalStorage() {
+    // lấy dữ liệu từ localStorage
+
+    // chuyễn dữ liệu từ chuỗi đó về lại mảng
+    khachHangs = JSON.parse(window.localStorage.getItem(key));
 }
 function init() {
-    if(window.localStorage.getItem('database-c2002') == null){
+    if (window.localStorage.getItem('database-c2002') == null) {
         let khachHang_01 = new khachHang(1, 'Huy', 972323348, 'duonghuy137@gmail.com', 'Hà Nội', 'VINFAST SA2.0');
         let khachHang_02 = new khachHang(2, 'Tiến', 973920938, 'tienVan09@gmail.com', 'TP.Hồ Chí Minh', 'VINFAST FADIL');
         let khachHang_03 = new khachHang(3, 'Long', 923242323, 'longnguyen73@gmail.com', 'TP.Hồ Chí Minh', 'VINFAST LUX 2.0');
@@ -37,7 +38,7 @@ function init() {
         let khachHang_06 = new khachHang(6, 'Bình', 909368750, 'BìnhLongAn@gmail.com', 'Hà Nội', 'VINFAST A2.0');
         khachHangs.push(khachHang_01, khachHang_02, khachHang_03, khachHang_04, khachHang_05, khachHang_06);
         setDataLocalStorage(key, khachHangs);
-    }else{
+    } else {
         getDataLocalStorage();
     }
 }
@@ -61,10 +62,25 @@ function showTT() {
                 `;
     }
 }
-
+//  check lỗi email. email nhập vào phải chứa kí tự @
+function checkEmail(email) {
+    let check = /@/g;
+    ketQuaCheckEmail = check.test(email);
+}
+// match error số điện thoại và định dạng sdt
+function checkNumberPhone(sdt){
+    let checknumber = sdt.toString();
+    arrnumber = checknumber.split('');
+    if(arrnumber.length==10){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 // thêm khách hàng ở trang khachHang.html
 function addkhachHang() {
-    td = khachHangs.length+1;
+    td = khachHangs.length + 1;
     let name = document.getElementById('name').value;
     // định dạng tên nhập vào sẽ viết hoa các chữ cái đầu, xóa bỏ khoảng trắng
     let myName = myFormat(name);
@@ -74,39 +90,54 @@ function addkhachHang() {
     let mauXe = document.getElementById('status').value;
 
     if (myName != '' && sdt != 0 && email != '') {
-        let khachang = new khachHang(td, myName, sdt, email, diaChi, mauXe);
-        // kiểm tra ID nhập vào không được trùng
-        if (index == -1) {
-            for(let i=0; i< khachHangs.length; i++){
-                if(td==khachHangs[i].id){
-                    td = khachHangs[i].id +1;
+        checkEmail(email)
+        if (ketQuaCheckEmail) {
+            if(checkNumberPhone(sdt)){
+                let khachang = new khachHang(td, myName, sdt, email, diaChi, mauXe);
+                // kiểm tra ID nhập vào không được trùng
+                if (index == -1) {
+                    for (let i = 0; i < khachHangs.length; i++) {
+                        if (td == khachHangs[i].id) {
+                            td = khachHangs[i].id + 1;
+                        }
+                    }
+                    khachHangs.push(khachang);
+                    setDataLocalStorage(key, khachHangs)
                 }
+                else {
+                    khachHangs[index].name = myName;
+                    khachHangs[index].sdt = sdt;
+                    khachHangs[index].email = email;
+                    khachHangs[index].diaChi = diaChi;
+                    khachHangs[index].mauXe = mauXe;
+                    index = -1;
+                    document.getElementById('addkhachHangs').innerHTML = 'Thêm khách hàng'
+                }
+                $('#after_run tr').remove();
+                showTT(khachHangs);
+                //  ..............................................
+                document.getElementById('name').value = '';
+                document.getElementById('sdt').value = 0;
+                document.getElementById('email').value = '';
+                document.getElementById('address').value = '';
+                document.getElementById('status').value = '';
             }
-            khachHangs.push(khachang);
-            setDataLocalStorage(key, khachHangs)
+            else{
+                alert('Số điện thoại không hợp lệ')
+            }
+            
+            
         }
-        else {
-            khachHangs[index].name = myName;
-            khachHangs[index].sdt = sdt;
-            khachHangs[index].email = email;
-            khachHangs[index].diaChi = diaChi;
-            khachHangs[index].mauXe = mauXe;
-            index = -1;
-            document.getElementById('addkhachHangs').innerHTML = 'Thêm khách hàng'
+        else{
+            alert('Email không hợp lệ')
         }
-            $('#after_run tr').remove();
-            showTT(khachHangs);
-        //  ..............................................
-        document.getElementById('name').value = '';
-        document.getElementById('sdt').value = 0;
-        document.getElementById('email').value = '';
-        document.getElementById('address').value = '';
-        document.getElementById('status').value = '';
+
     } else {
-        alert('Thông tin  không hợp lệ!!!')
+        alert('Bạn hãy điền đầy đủ thông tin!!!')
     }
 
 }
+
 function myFormat(name) {
     let myString = name.toLowerCase().split(' ');
     for (let i = 0; i < myString.length; i++) {
@@ -331,7 +362,7 @@ function sortABC() {
 //     }
 // }
 function run() {
-    
+
     init();
     showTT();
     //     // retest();

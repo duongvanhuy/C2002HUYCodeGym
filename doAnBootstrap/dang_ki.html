@@ -16,10 +16,11 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="../css/dang_ki.css">
+  <script src="../jscript/dang_ki.js"></script>
   <title>Đăng kí lái thử</title>
 </head>
 
-<body >
+<body onload="init()" >
   <header>
     <nav class="navbar navbar-expand-lg navbar-light main_header">
       <div class="container-fluid f-header">
@@ -151,10 +152,9 @@
                   <!-- <label class="visually-hidden" for="inlineFormSelectPref">Tỉnh thành</label> -->
                   <div class="col-sm-9">
                     <select class="form-select" id="inlineFormSelectPref">
-                      <option selected>Hà Nội</option>
-                      <option value="1">Đà Nẵng</option>
-                      <option value="2">TP.Hồ Chí Minh</option>
-                      <option value="3">TP. Huế</option>
+                      <option selected value="Hà Nội">Hà Nội</option>
+                      <option value="Đà Nẵng">Đà Nẵng</option>
+                      <option value="TP.Hồ Chí Minh">TP.Hồ Chí Minh</option>
                     </select>
                   </div>
                 </div>
@@ -164,9 +164,9 @@
                   <div class="col-sm-9">
                     <select class="form-select" id="inlineFormSelectPref1">
                       <option selected>Quận/Huyện</option>
-                      <option value="1">Đà Nẵng</option>
-                      <option value="2">TP.Hồ Chí Minh</option>
-                      <option value="3">TP. Huế</option>
+                      <option value="Đà Nẵng">Đà Nẵng</option>
+                      <option value="TP.Hồ Chí Minh">TP.Hồ Chí Minh</option>
+                      <option value="Hà Nội">Hà Nội</option>
                     </select>
                   </div>
                 </div>
@@ -176,8 +176,8 @@
                   <div class="col-sm-9">
                     <select class="form-select" id="inlineFormSelectPref2">
                       <option selected>LUX SA2.0</option>
-                      <option value="1">FADIL</option>
-                      <option value="2">LUX A2.0</option>
+                      <option value="FADIL">FADIL</option>
+                      <option value="LUX A2.0">LUX A2.0</option>
                     </select>
                   </div>
                 </div>
@@ -198,7 +198,7 @@
                   </div>
                 </div>
                 <div class="row dang_ki">
-                  <button  class="btn btn-primary " onclick="addKhachHangs()">Đăng kí</button>
+                  <button  class="btn btn-primary " onclick="addkhachHangItem()">Đăng kí</button>
                   <a href="">
                     <p class="my-3 text-center">HOTLINE - 1900 232 389 (1000đ/phút)</p>
                   </a>
@@ -208,8 +208,6 @@
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
   <!-- content -->
@@ -418,6 +416,3 @@
 </body>
 
 </html>
-<script src="../jscript.js/khachHang.js">
-
-</script>
