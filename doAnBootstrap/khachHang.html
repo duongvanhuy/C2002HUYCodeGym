@@ -27,23 +27,27 @@
         <div class="row">
             <div class="col-md-2 menager">
                 <div class="header-banner fw-bold">
-                    <div id="data_main" class="text-primary text-uppercase">Dữ liệu gốc</div>
+                    <div id="data_main" class="text-primary text-uppercase" onclick="turn_on(1)"><span><i class="fa fa-folder-open-o" aria-hidden="true"></i></span> Dữ liệu gốc</div>
                     <div id="options01">
                         <p>Kế hoạch lựa chọn nhà thầu</p>
                         <p>Thông tin đấu thầu</p>
-                        <p>Mở đóng chấm thầu</p>
+                        <p>Mở/đóng/chấm thầu</p>
                         <p>kết quả đấu thầu</p>
                         <p>Các bên liên quan</p>
                     </div>
-                    <div id="bitdata" class="text-primary text-uppercase">Thống kê bitdata</div>
+                    <div id="bitdata" class="text-primary text-uppercase" onclick="turn_on(2)"><span><i class="fa fa-folder-open-o" aria-hidden="true"></i></span> Thống kê bitdata</div>
                     <div id="options02">
                         <p>a</p>
                         <p>b</p>
                         <p>c</p>
                     </div>
-                    <div id="menagerment" class="text-primary text-uppercase">Quản trị</div>
+                    <div id="menagerment" class="text-primary text-uppercase" onclick="turn_on(3)"><span><i class="fa fa-folder-open-o" aria-hidden="true"></i></span> Quản trị</div>
                     <div id="options03">
                         <p>Người dùng</p>
+                        <div class="show_Nguoi_dung">
+                            <p>Đăng kí lái xe</p>
+                            <p>Quản lý danh mục ô tô</p>
+                        </div>
                         <p>Chức năng hệ thống</p>
                         <p>Danh mục dùng chung</p>
                         <p>Từ khóa</p>
@@ -54,9 +58,9 @@
                 <!--  chức năng  -->
                 <div class="row header">
                     <!-- options -->
-                    <div class="col-md-4 ">
+                    <div class="col-md-2">
                         <div class="row">
-                            <label for="name"><b>Tên khách hàng</b> </label>
+                            <label for="name"><b>Tên khách hàng</b></label>
                         </div>
 
                         <div class="row">
@@ -65,12 +69,7 @@
                         <div class="row">
                             <label for="sdt"><b>Số điện thoại</b></label>
                         </div>
-                        <div class="row">
-                            <label for="address"><b>Địa chỉ</b></label>
-                        </div>
-                        <div class="row">
-                            <label for="status"><b>Mẫu xe</b></label>
-                        </div>
+
                     </div>
                     <!-- /options -->
                     <!-- input -->
@@ -78,6 +77,20 @@
                         <div class="row"><input type="text" id="name" size="31"></div>
                         <div class="row"><input type="text" name="" id="email" size="31"></div>
                         <div class="row"><input type="number" id="sdt" min="111111111" max="999999999"></div>
+
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <label for="address"><b>Địa chỉ</b></label>
+                        </div>
+                        <div class="row">
+                            <label for="status"><b>Mẫu xe</b></label>
+                        </div>
+                        <div class="row">
+                            <label for="time"><b>Thời gian</b></label>
+                        </div>
+                    </div>
+                    <div class="col">
                         <div class="row">
                             <select name="" id="address">
                                 <option value="Hà Nội">Hà Nội</option>
@@ -92,10 +105,12 @@
                                 <option value="VINFAST FADIL">VINFAST FADIL</option>
                             </select>
                         </div>
+                        <div class="row">
+                            <input type="date" name="" id="time">
+                        </div>
                     </div>
                     <!-- /input -->
                 </div>
-
                 <div class="row" id="edit">
                     <div class="btn btn-success" id="addkhachHangs" onclick="addkhachHang()">Thêm khách hàng</div>
                     <div class="dropdown">
@@ -113,21 +128,22 @@
                 </div>
                 <div class="row">
                     <input itemid="search" type="text" name="" id="search" onkeyup="search()"
-                        placeholder="tìm kiếm sinh viên...">
+                        placeholder="tìm kiếm khách hàng...">
                 </div>
                 <!-- /chức năng -->
                 <!-- </form> -->
                 <div class="row  itemKhachHang">
+                    <h3><span class="text-danger"><i class="fa fa-home" aria-hidden="true"></i></span> danh sách người dùng</h3>
                     <table class="table table-sm table-striped table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th>STT</th>
                                 <th>#MÃ SỐ</th>
                                 <th>HỌ TÊN</th>
                                 <th>SỐ ĐIỆN THOẠI</th>
                                 <th>EMAIL</th>
                                 <th>ĐỊA CHỈ</th>
                                 <th>MẪU XE</th>
+                                <th>THỜI GIAN</th>
                                 <th>CHỈNH SỬA</th>
                                 <th>XÓA</th>
                             </tr>
@@ -147,3 +163,4 @@
 
 </html>
 <script src="../jscript/khachHang.js"></script>
+<script src="../jscript/menagerment.js"></script>

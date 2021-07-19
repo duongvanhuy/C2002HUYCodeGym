@@ -2,6 +2,8 @@
     border: 1px solid black;
     width: 100%;
     padding: 20px !important;
+    font-size: 14px;
+
 }
 .main-header{
     padding: 0 40px;
@@ -42,6 +44,7 @@ body{
     background-color: #F8F8FF;
     font-size: 13px;
     font-weight: bolder;
+    cursor: pointer;
 }
 #options01{
     padding: 15px;
@@ -53,7 +56,20 @@ body{
     padding: 15px;
 }
 select#address {
-    width: 200px;
-}input#sdt {
-    width: 200px;
+    width: 245px;
+    height: 28px;
+}
+input#sdt {
+    width: 245px;
+}
+select#status {
+    width: 245px;
+    height: 28px;
+}
+input#time {
+    width: 245px;
+}
+.itemKhachHang{
+    border: 1px solid;
+    padding: 10px;
 }
