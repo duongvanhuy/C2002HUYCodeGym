@@ -55,7 +55,7 @@ function showTT() {
                     <td>${khachHangs[i].diaChi}</td>
                     <td>${khachHangs[i].mauXe}</td>
                     <td>${khachHangs[i].time}</td>
-                    <td><a id='tr_99' class='text-warning' onclick='editTT(${khachHangs[i].id})'> <i  class="fa fa-pencil-square-o  aria-hidden="true"></i><a></td>
+                    <td><a id='tr_99' class='text-warning' onclick='editTT(${i})'> <i  class="fa fa-pencil-square-o  aria-hidden="true"></i><a></td>
                     <td><a id='tr_100' class='text-success' onclick='removeStudent(${khachHangs[i].id})'> <i class="fa fa-trash-o" aria-hidden="true"></i><a></td>        
                 </tr>
                 `;
@@ -111,7 +111,8 @@ function addkhachHang() {
                     khachHangs[index].email = email;
                     khachHangs[index].diaChi = diaChi;
                     khachHangs[index].mauXe = mauXe;
-                    khachHangs[index].value = time;
+                    khachHangs[index].time = time;
+                    setDataLocalStorage(key, khachHangs)
                     index = -1;
                     document.getElementById('addkhachHangs').innerHTML = 'Thêm khách hàng'
                 }
@@ -206,59 +207,19 @@ function removeStudent(id) {
 // chỉnh sửa thông tin
 function editTT(id) {
     // alert(students.length);
-    document.getElementById('name').value = khachHangs[id-2].name;
-    document.getElementById('sdt').value = khachHangs[id-2].sdt;
-    document.getElementById('email').value = khachHangs[id-2].email;
-    document.getElementById('address').value = khachHangs[id-2].diaChi;
-    document.getElementById('status').value = khachHangs[id-2].mauXe;
-    document.getElementById('time').value = khachHangs[id-2].time;
+    // getDataLocalStorage();
+    document.getElementById('name').value = khachHangs[id].name;
+    document.getElementById('sdt').value = khachHangs[id].sdt;
+    document.getElementById('email').value = khachHangs[id].email;
+    document.getElementById('address').value = khachHangs[id].diaChi;
+    document.getElementById('status').value = khachHangs[id].mauXe;
+    document.getElementById('time').value = khachHangs[id].time;
+
     document.getElementById('addkhachHangs').innerHTML = 'Sửa thông tin'
-    index = id - 1;
+    index = id;
+    
 }
-// function sortHeight() {
 
-//     students.sort(function (a, b) {
-//         return b.sumTest() - a.sumTest();
-//     })
-
-//     $('#after_run tr').remove();
-//     for (let i = 0; i < students.length; i++) {
-//         show_01.innerHTML += `
-//                 <tr> 
-//                     <td>${i + 1}</td>
-//                     <td>${students[i].id}</td>
-//                     <td>${students[i].name}</td>
-//                     <td>${students[i].diemQT}</td>
-//                     <td>${students[i].diemTHI}</td>
-//                     <td>${students[i].sumTest()}</td>
-//                     <td><a id='tr_99' class='text-warning' onclick='editTT(${students[i].id})'> <i  class="fa fa-pencil-square-o  aria-hidden="true"></i><a></td>
-//                     <td><a id='tr_100' class='text-success' onclick='removeStudent(${students[i].id})'> <i class="fa fa-trash-o" aria-hidden="true"></i><a></td>        
-//                 </tr>
-//                 `;
-//     }
-// }
-// function sortLow() {
-
-//     students.sort(function (a, b) {
-//         return a.sumTest() - b.sumTest();
-//     })
-
-//     $('#after_run tr').remove();
-//     for (let i = 0; i < students.length; i++) {
-//         show_01.innerHTML += `
-//             <tr> 
-//                 <td>${i + 1}</td>
-//                 <td>${students[i].id}</td>
-//                 <td>${students[i].name}</td>
-//                 <td>${students[i].diemQT}</td>
-//                 <td>${students[i].diemTHI}</td>
-//                 <td>${students[i].sumTest()}</td>
-//                 <td><a id='tr_99' class='text-warning' onclick='editTT(${students[i].id})'> <i  class="fa fa-pencil-square-o  aria-hidden="true"></i><a></td>
-//                 <td><a id='tr_100' class='text-success' onclick='removeStudent(${students[i].id})'> <i class="fa fa-trash-o" aria-hidden="true"></i><a></td>        
-//             </tr>
-//             `;
-//     }
-// }
 function sortABC() {
     khachHangs.sort(function (a, b) {
         let nameA = a.name.toUpperCase(); // ignore upper and lowercase
@@ -365,13 +326,10 @@ function sortABC() {
 //     }
 // }
 function run() {
-
     init();
     showTT();
     //     // retest();
     //     // xepLoai();
     //     // hocBong();
-
-
 }
 run();

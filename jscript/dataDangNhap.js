@@ -26,12 +26,11 @@ function init() {
 }
 // check thông tin đăng nhập
 function checkLogin() {
-    // alert(itemKhachHangs.length)
     let valueName = document.getElementById('inputPassword1');
     let valuePassWord = document.getElementById('inputPassword2');
     let check = true;
-    // 6
-    // let obj = JSON.parse(itemKhachHangs);
+    let keys ='checkDangNhap';
+    let index =-1
    getDataLocalStorage();
     for (let i = 0; i < itemKhachHangs.length; i++) {
         check = true;
@@ -40,7 +39,9 @@ function checkLogin() {
             //  có 2 cú pháp để chuyển hướng tới 1 trang:
             //  1 là window.location.replace(...)
             //  2 là: window.location.href =...
-            window.location.href = '../doAnBootstrap/Trangchu.html'
+            index=1;
+            window.localStorage.setItem(keys, index);
+            window.location.href = 'Trangchu.html'
             break;
         }
         check = false;

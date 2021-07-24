@@ -1,4 +1,5 @@
 
+
 // let email1 =document.getElementById('inputPassword1').value;
 function kTEmail(){
     // let email1 = document.forms['myForm']['email'].value;

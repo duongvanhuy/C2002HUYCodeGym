@@ -73,3 +73,8 @@ input#time {
     border: 1px solid;
     padding: 10px;
 }
+input#search{
+    border-radius: 0.25rem;
+}
+/* thống kê ô tô */
+

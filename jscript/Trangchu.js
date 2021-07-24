@@ -1,3 +1,21 @@
+  if(window.localStorage.getItem('checkDangNhap')==1){
+    let dangNhap = document.getElementById('checDangNhaps')
+    document.getElementById('personal').addEventListener('mouseover', function(){
+    
+      $('#checkDangNhaps').attr('style','display: block !important')
+
+  })
+  document.getElementById('personal').addEventListener('mouseout', function(){
+    $('#checkDangNhaps').attr('style','display: none !important')
+
+})
+  }else{
+    alert('pp');
+  }
+
+
+
+
 $(document).ready(function () {
     var owl = $('.owl-carousel');
     owl.owlCarousel({
@@ -46,4 +64,5 @@ $(document).ready(function () {
     //     }
         
   });
+
  

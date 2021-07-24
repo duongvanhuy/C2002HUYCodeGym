@@ -1,3 +1,6 @@
+ul{
+  list-style: none;
+}
 .owl-carousel {
     text-align: center;
   }
@@ -98,6 +101,26 @@ color: #000;
   .f-body {
     margin-top: 20px;
   }
+  #checkDangNhaps{
+    position: relative;
+    top: 20px;
+    left: -100px;
+    /* z-index: 100; */
+    overflow: hidden;
+    display: none;
+    color:#fff !important;
+    background: #CCCCCC;
+    width: 200px;
+    font-size: 13px;
+  }span#personal {
+    position: absolute;
+    /* right: 100px; */
+    left: 1130px;
+  
+}svg.bi.bi-person-circle {
+  width: 20px;
+  height: 20px;
+}
   /* demo */
   .col-md-8 {
     padding-right: 0;
