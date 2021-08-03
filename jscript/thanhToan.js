@@ -1,82 +1,73 @@
-$(document).ready(function(){
-  
-    // 
-    let tinhThanhs= document.getElementById('tinhThanh');
-    let chonHuyens = document.getElementsByClassName('chonHuyen');
-    let showrooms = document.getElementById('showroom');
-    
-    $('#tinhThanh').change(function(){
-        if(tinhThanhs.value =='Hà Nội'){
-            $('.HCM').attr('style','display: none !important');
-            $('.HN').attr('style','display: block !important');
-        }else{
-            $('.HCM').attr('style','display: block !important');
-            $('.HN').attr('style','display: none !important');
-        }
-     
-    })
-    //  còn nhiều trường hợp nữa
-    // $('.chonHuyen').change(function(){
-    //     if(chonHuyens.v =='Quận Long Biên'){
-    //         alert('jj')
-    //         $('.HCM01').attr('style','display: none !important');
-    //         $('.HN01').attr('style','display: block !important');
-    //     }
-    //     else{
-    //         alert('ê')
-    //         $('.HCM01').attr('style','display: block !important');
-    //         $('.HN01').attr('style','display: none !important');
-           
-    //     }
-    // })
-
-    //  tùy từng mã mà giảm n tiền 
-    // nhưng giờ làm 1 cái mã đã rồi có thời gian phát triển tiếp
-   
-  
-})
-  // tính giá xe
-  let apDungs = document.getElementById('maGiamGia');
-    //  ĐỊNH NGHĨA SẴN MÃ GIẢM GIÁ
-    let myGiamGia =['HKL0949ON', 'JKFPSKSUU', '097KAJOPL', 'JSOS009PS','LLASPOER0']
-  let giaNiemYet = document.getElementById('giaNiemYet')
-  let uaDai = document.getElementById('uaDai');
-  let giaDonHang = document.getElementById('donGia');
-  let checkvouCher = document.getElementById('vouCher');
-  let e_voucher = document.getElementById('e-voucher')
-  let vouCher=0;
-  let giaBD =1552E6;
-  let giaUaDai =425925E3
-  let tongGia = giaBD - giaUaDai;
-  let check = true;
-   
-    
-function checkGia(){
-    for(let i=0; i< myGiamGia.length; i++){
-        check = true
-        if(apDungs.value==myGiamGia[i]){
-            vouCher = 5E7
-            // alert('aa')
-            break;
-        }else{
-            check = false;
-        }
+const keys = 'KhachHang_MuaHang';
+let arrayKhachHang =[];
+let show = document.getElementById('tableItemKhachHang');
+let hoTen = document.getElementById('hoTen');
+let CMND = document.getElementById('CMND');
+let soDT = document.getElementById('sodienThoai');
+let email = document.getElementById('email');
+class KhachHangs{
+    constructor(maKH, hoTen, CMND, SDT, Email ){
+        this.maKH = maKH;
+        this.hoTen = hoTen;
+        this.CMND = CMND;
+        this.SDT = SDT;
+        this.Email = Email;
     }
-    if(check){
-        tongGia -= vouCher
-        e_voucher.innerHTML = vouCher.toLocaleString('it-IT')
-    }
-    else{
-        
-        checkvouCher.innerHTML = 'E-VouCher không hợp lệ'
-    }
-    tongGia -= vouCher;
-    giaNiemYet.innerHTML = giaBD.toLocaleString('it-IT')
-uaDai.innerHTML = giaUaDai.toLocaleString("it-IT");
-giaDonHang.innerHTML =tongGia.toLocaleString("it-IT")
 }
-giaNiemYet.innerHTML = giaBD.toLocaleString('it-IT')
-uaDai.innerHTML = giaUaDai.toLocaleString("it-IT");
-giaDonHang.innerHTML =tongGia.toLocaleString("it-IT")
-
-
+function init(){
+    if(window.localStorage.getItem('KhachHang_MuaHang') == null){
+       let khachHang01 = new KhachHangs(0,'Dương Văn Huy','2002109878','0353133137','duonghuy137@hmail.com')
+    //    let khachhang02 = new KhachHangs(2,'Nguyễn Đức Long','2000219800','0984847823','beLeThi98@hmail.com');
+       arrayKhachHang.push(khachHang01)
+       setLocalStorage(keys, arrayKhachHang);
+    }else{
+        getDataLocalStorage()
+    }
+}
+function setLocalStorage(keys, data){
+    window.localStorage.setItem(keys,JSON.stringify(data));
+}
+function getDataLocalStorage(){
+   arrayKhachHang = JSON.parse(window.localStorage.getItem(keys));
+}
+//  
+function checkMuaHang(){
+    let td = 1;
+    getDataLocalStorage();
+    if(hoTen.value !='' && CMND.value != '' && soDT.value != '' && email.value != ''){
+        //  kiểm tra mã khách hàng không được trùng
+        for(let i=0; i< arrayKhachHang.length; i++){
+            
+           while(td == arrayKhachHang[i].maKH){
+               td ++;
+           }
+        }
+        // thêm vào local
+       let khachang = new KhachHangs(td, hoTen.value, CMND.value, soDT.value, email.value);
+        arrayKhachHang.push(khachang);
+        setLocalStorage(keys, arrayKhachHang)
+    }else{
+        alert('Bạn hãy điền đầy đủ thông tin')
+        return false;
+    }
+}
+//  show thông tin khách hàng mua xe
+function showItemKhachHang(){
+    getDataLocalStorage()
+    for(let  i= 0; i< arrayKhachHang.length; i++){
+        show.innerHTML += `
+        <tr>
+            <td>${arrayKhachHang[i].maKH}</td>
+            <td>${arrayKhachHang[i].hoTen}</td>
+            <td>${arrayKhachHang[i].CMND}</td>
+            <td>${arrayKhachHang[i].SDT}</td>
+            <td>${arrayKhachHang[i].Email}</td>
+            <td>${11}</td>
+        </tr>
+        `
+    }
+}
+function run(){
+    showItemKhachHang();
+}
+run()

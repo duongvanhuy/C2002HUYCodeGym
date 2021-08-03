@@ -15,16 +15,9 @@ class khachHang {
     }
 }
 function setDataLocalStorage(key, data) {
-    // 4 biến mảng khách hàng thành chuỗi để lưu
-    //   let obj = JSON.stringify(data);
-    // 5 lưu chuỗi vào localStorage
-    // window.localStorage.setItem(key, obj);
-    //   hoặc có thể viết 
     window.localStorage.setItem(key, JSON.stringify(data))
 }
 function getDataLocalStorage() {
-    // lấy dữ liệu từ localStorage
-    // chuyễn dữ liệu từ chuỗi đó về lại mảng
     khachHangs = JSON.parse(window.localStorage.getItem(key));
 }
 function init() {
@@ -117,7 +110,7 @@ function addkhachHang() {
                     document.getElementById('addkhachHangs').innerHTML = 'Thêm khách hàng'
                 }
                 $('#after_run tr').remove();
-                showTT(khachHangs);
+                showTT();
                 //  ..............................................
                 document.getElementById('name').value = '';
                 document.getElementById('sdt').value = 0;
@@ -192,8 +185,6 @@ function removeStudent(id) {
     getDataLocalStorage()
     for (let i = 0; i < khachHangs.length; i++) {
         arr.push(khachHangs[i].id);
-        //    let compare = id.localeCompare(arr[i])
-        //    alert(compare);
         if (id == arr[i]) {
             let index = arr.indexOf(arr[i]);
             khachHangs.splice(index, 1);
@@ -202,7 +193,7 @@ function removeStudent(id) {
         }
     }
     $('#after_run tr').remove();
-    showTT(khachHangs);
+    showTT();
 }
 // chỉnh sửa thông tin
 function editTT(id) {
@@ -222,15 +213,14 @@ function editTT(id) {
 
 function sortABC() {
     khachHangs.sort(function (a, b) {
-        let nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        let nameA = a.name.toUpperCase(); 
+        let nameB = b.name.toUpperCase(); 
         if (nameA < nameB) {
             return -1;
         }
         if (nameA > nameB) {
             return 1;
         }
-        // names must be equal
         return 0;
     });
     $('#after_run tr').remove();
@@ -250,86 +240,8 @@ function sortABC() {
             `;
     }
 }
-
-//  update thông tin sau chỉnh sửa
-//  xây đựng danh sách sinh viên thi lại;
-// function retest() {
-//     let show = document.getElementById('retest');
-//     for (let i = 0; i < students.length; i++) {
-//         if (students[i].sumTest() < 5) {
-//             show.innerHTML += `
-//         <tr>
-//             <td>${i + 1}</td>
-//             <td>${students[i].name}</td>
-//             <td>${students[i].sumTest()}</td>
-//         </tr>
-//         `
-//         }
-//     }
-// }
-// 
-//  xây dựng hàm xếp loại sinh viên
-//  check thêm điều kiện sum<=10 và sum sum>=0
-// function xepLoai() {
-//     let show = document.getElementById('xeploai');
-//     for (let i = 0; i < students.length; i++) {
-//         if (students[i].sumTest() >= 8) {
-//             xeploai = 'A'
-//         }
-//         else if (students[i].sumTest() >= 6.5) {
-//             xeploai = 'B';
-//         }
-//         else if (students[i].sumTest() >= 5) {
-//             xeploai = 'C';
-//         }
-//         else {
-//             xeploai = 'D';
-//         }
-//         show.innerHTML += `
-//         <tr>
-//             <td>${i + 1}</td>
-//             <td>${students[i].name}</td>
-//             <td>${students[i].sumTest()}</td>
-//             <td>${xeploai}</td>
-//         </tr>
-//         `
-//     }
-// }
-//  danh sách sinh viên nhận học bổng ( số lượng 3);
-// function hocBong() {
-//     // let show = document.getElementById('hocbong');
-//     students.sort(function (a, b) {
-//         return b.sumTest() - a.sumTest();
-//     })
-//     for (let i = 0; i < 3; i++) {
-//         if (students[i].sumTest() >= 8) {
-//             xeploai = 'A'
-//         }
-//         else if (students[i].sumTest() >= 6.5) {
-//             xeploai = 'B';
-//         }
-//         else if (students[i].sumTest() >= 5) {
-//             xeploai = 'C';
-//         }
-//         else {
-//             xeploai = 'D';
-//         }
-
-//         show.innerHTML += `
-//         <tr>
-//             <td>${i + 1}</td>
-//             <td>${students[i].name}</td>
-//             <td>${students[i].sumTest()}</td>
-//             <td>${xeploai}</td>
-//         </tr>
-//         `
-//     }
-// }
 function run() {
     init();
     showTT();
-    //     // retest();
-    //     // xepLoai();
-    //     // hocBong();
 }
 run();

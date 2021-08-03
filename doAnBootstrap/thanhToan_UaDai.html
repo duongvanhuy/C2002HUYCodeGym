@@ -40,7 +40,7 @@
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
                                 <a class="nav-link" href="mua_ngay.html">Lựa chọn xe</a>
-                                <a class="nav-link" href="thanhToan_UaDai.html">Thanh toán & ưu đãi</a>
+                                <a class="nav-link" href="thanhToan_UaDai.html"><span class="border-bottom border-3 border-primary">Thanh toán & ưu đãi</span></a>
                                 <a class="nav-link" href="thanhToan.html">Thanh toán</a>
                             </div>
                         </div>
@@ -171,35 +171,37 @@
                 <p class="mauXe" id="mauxe">VINFAST LUX A2.0</p>
                 <!-- xét xem với mỗi mẫu xe gì thì ta có giá xe riêng -->
                 <!-- ở đây ta chỉ làm 1 mẫu xe chung khi có thời gian phát triển thêm -->
-                <div class="row">
+                <div class="row pb-3">
                     <div class="col">Phiên bản</div>
                     <div class="col">Màu sắc</div>
                     <div class="col">Nội thất</div>
                 </div>
-                <div class="row border-top">
+                <div class="row border-top py-4">
                     <div class="col" >Giá niêm yết</div>
-                    <div class="col" id="giaNiemYet"></div>
-                    
+                    <div class="col" id="giaNiemYet">1.552.000.000</div>
                 </div>
-                <div class="row ">
+                <div class="row pb-4">
                     <div class="col">Ưu đãi</div>
-                    <div class="col" id="uaDai"></div>
+                    <div class="col" id="uaDai">
+                        425.925.000</div>
                 </div>
-                <div class="row ">
+                <div class="row pb-2">
                     <div class="col">E-Voucher</div>
                     <div class="col" id="e-voucher"></div>
                 </div>
-                <div class="row border-top">
+                <div class="row border-top py-4">
                     <div class="col">Giá trị đơn hàng</div>
-                    <div class="col" id="donGia"></div>
+                    <div class="col" id="donGia">
+                        1.126.075.000</div>
                 </div>
-                <button id="datMua" onclick="addSanPham()">Đặt mua</button>
+                <button id="datMua" onclick="addSanPham()" >Tiếp theo</button>
             </div>
         </div>
     </div>
 </body>
 
 </html>
-<script src="../jscript.js/mua_ngay.js"></script>
+<!-- <script src="../jscript.js/mua_ngay.js"></script> -->
+<!-- <script src="../jscript/thanhToan_UuDai.js"></script> -->
 <script src="../jscript/thanhToan_UuDai.js"></script>
-<script src="../jscript/thanhToan.js"></script>
+<script src="../jscript/trangThai.js"></script>

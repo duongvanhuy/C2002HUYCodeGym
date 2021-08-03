@@ -18,6 +18,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../css/khachHang.css">
+
     <title>Document</title>
 </head>
 
@@ -67,51 +68,32 @@
                         </div>
 
                         <div class="row">
-                            <label for="email"><b>Email</b></label>
+                            <label for="passWord"><b>mật khẩu</b></label>
                         </div>
-                        <div class="row">
-                            <label for="sdt"><b>Số điện thoại</b></label>
-                        </div>
+                        
 
                     </div>
                     <!-- /options -->
                     <!-- input -->
                     <div class="col">
                         <div class="row"><input type="text" id="name" size="31"></div>
-                        <div class="row"><input type="text" name="" id="email" size="31"></div>
-                        <div class="row"><input type="tel" id="sdt" min="111111111" max="999999999"></div>
-
+                        <div class="row"><input type="text" name="" id="matKhau" size="31"></div>
+                       
                     </div>
                     <div class="col-md-2">
                         <div class="row">
-                            <label for="address"><b>Địa chỉ</b></label>
+                            <label for="email"><b>Email</b></label>
                         </div>
-                        <div class="row">
-                            <label for="status"><b>Mẫu xe</b></label>
-                        </div>
-                        <div class="row">
-                            <label for="time"><b>Thời gian</b></label>
-                        </div>
+                        <!-- <div class="row">
+                            <label for="sdt"><b>Số điện thoại</b></label>
+                        </div> -->
                     </div>
                     <div class="col">
-                        <div class="row">
-                            <select name="" id="address">
-                                <option value="Hà Nội">Hà Nội</option>
-                                <option value="TP.Hồ Chí Minh">TP.Hồ Chí Minh</option>
-                            </select>
-                        </div>
-                        <div class="row">
-                            <select name="" id="status">
-                                <option value="VINFAST SA2.0">VINFAST SA2.0</option>
-                                <option value="VINFAST A2.0">VINFAST A2.0</option>
-                                <option value="VINFAST LUX 2.0">VINFAST LUX 2.0</option>
-                                <option value="VINFAST FADIL">VINFAST FADIL</option>
-                            </select>
-                        </div>
-                        <div class="row">
-                            <input type="date" name="" id="time">
-                        </div>
+                        <div class="row"><input type="text" id="email" size="31"></div>
+                        <!-- <div class="row"><input type="tel" name="" id="sdt" size="31"></div> -->
+                       
                     </div>
+                    
                     <!-- /input -->
                 </div>
                 <div class="row" id="edit">
@@ -136,17 +118,14 @@
                 <!-- /chức năng -->
                 <!-- </form> -->
                 <div class="row  itemKhachHang">
-                    <h3><span class="text-danger"><i class="fa fa-home" aria-hidden="true"></i></span> danh sách người dùng</h3>
+                    <h3><span class="text-danger text-uppercase"><i class="fa fa-home" aria-hidden="true"></i></span >tài khoản người dùng</h3>
                     <table class="table table-sm table-striped table-hover table-bordered">
                         <thead>
                             <tr>
                                 <th>#MÃ SỐ</th>
                                 <th>HỌ TÊN</th>
-                                <th>SỐ ĐIỆN THOẠI</th>
                                 <th>EMAIL</th>
-                                <th>ĐỊA CHỈ</th>
-                                <th>MẪU XE</th>
-                                <th>THỜI GIAN</th>
+                                <th>MẬT KHẨU</th>
                                 <th>CHỈNH SỬA</th>
                                 <th>XÓA</th>
                             </tr>
@@ -165,5 +144,6 @@
 </body>
 
 </html>
-<script src="../jscript/khachHang.js"></script>
+
 <script src="../jscript/menagerment.js"></script>
+<script src="../jscript/taikhoanKH.js"></script>

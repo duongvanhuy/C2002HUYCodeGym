@@ -1,80 +1,118 @@
-
-const key = 'itemOto';
-let itemCar = [];
-let myArrayTongTien =[];
-// let index= -1;
-class sanPham{
-    constructor(hinhAnh,maSP, tenSp, giaTien){
-        this.hinhAnh = hinhAnh;
-        this.maSP = maSP;
-        this.tenSp = tenSp;
-        this.giaTien = giaTien;
-    }  
-}
-function setLocalStorage(key, data){
-    window.localStorage.setItem(key,JSON.stringify(data));
-}
-//  lấy giá trị từ local
 function getDataLocalStorage(){
-   itemCar = JSON.parse(window.localStorage.getItem(key));
+    arraySanPham = JSON.parse(window.localStorage.getItem('TTSanPham'));
+ }
+
+let apDungs = document.getElementById('maGiamGia');
+//  ĐỊNH NGHĨA SẴN MÃ GIẢM GIÁ
+let myGiamGia = ['HKL0949ON', 'JKFPSKSUU', '097KAJOPL', 'JSOS009PS', 'LLASPOER0']
+// 
+let giaNiemYet = document.getElementById('giaNiemYet')
+let uaDai = document.getElementById('uaDai');
+let giaDonHang = document.getElementById('donGia');
+// 1 thẻ div - khi voucher không đúng thì hiện thị voucher không hợp lệ
+let checkvouCher = document.getElementById('vouCher');
+let e_voucher = document.getElementById('e-voucher')
+//  demo 1 sản phẩm có các giá trị ban đầu là const
+//  phát triển đề tài thì phải tạo các trang chi tiết khác để mua
+//  từ đó mới tạo mảng dữ liệu để lưu thông tin
+let vouCher = 0;
+let giaBD = 1552E6;
+let giaUaDai = 425925E3;
+let tongGia = giaBD - giaUaDai;
+let check = true;
+//  check voucher=> suy ra giá
+function checkGia() {
+    for (let i = 0; i < myGiamGia.length; i++) {
+        check = true
+        if (apDungs.value == myGiamGia[i]) {
+            vouCher = 5E7
+            break;
+        } else {
+            check = false;
+        }
+    }
+    if (check) {
+        tongGia -= vouCher
+        e_voucher.innerHTML = vouCher.toLocaleString('it-IT')
+    }
+    else {
+        checkvouCher.innerHTML = 'E-VouCher không hợp lệ'
+    }
+    tongGia -= vouCher;
+    //  khi bấm vào ô áp dụng thì nó sẽ định nghĩa lại các giá trị của giá 
+    giaNiemYet.innerHTML = giaBD.toLocaleString('it-IT')
+    uaDai.innerHTML = giaUaDai.toLocaleString("it-IT");
+    giaDonHang.innerHTML = tongGia.toLocaleString("it-IT")
 }
-//  hàm khởi tạo
-function init(){
-    // if(window.localStorage.getItem('itemOto') == null){
-    //    let sanpham01 = new sanPham('../img/AH04.png','HDTK210L','VINFAST FADIL', 12)
-    //    let sanpham02 = new sanPham('../img/VFe34.png','HDTK210K','VINFAST VF e34',13 ) 
-    //    let sanpham03 = new sanPham('../img/2LuxSA.png','HDTK210N','VINFAST LUX A2.0',14)
-    // //    myArrayTongTien.push(sanpham01.tongTien(),sanpham02.tongTien(),sanpham03.tongTien()) 
-    //    itemCar.push(sanpham01,sanpham02,sanpham03);
-    //    setLocalStorage(key,itemCar);
-      
-    // }else{
-    //     getDataLocalStorage()
-    // }
-    getDataLocalStorage()
-}
-//  phương thức aad  sản phẩm 
-// khi khách hàng bấm nút mua hàng ở file thanhToan_UaDai.html
-function addSanPham(){
-//    1.kiểm tra mã sản phẩm không được trùng
-//    2. kiểm tra tên sản phẩm bằng những gía trị gì để từ đó suy ra được ảnh mình cần lưu
-//    2. add thông tin
-//  lẽ ra mã sản phẩm phải được định nghãi từ ngoài sản ohaamr
-//  nhưng tránh mất thời gian, maSP mình sẽ cho radom cho nhanh
-    let maSp = Math.random().toString(36).substr(2, 8).toUpperCase()
-    let tenSP = document.getElementById('mauxe').innerHTML;
-    let tongTien = document.getElementById('donGia').innerHTML
-    let sanpham = new sanPham('../img/AH04.png', maSp, tenSP,tongTien)
-    itemCar.push(sanpham);
-    setLocalStorage(key, itemCar)
-}
+//  nếu không bấm vào ô áp dụng thì các giá trị vẫn hiện thị như thường
+// giaNiemYet.innerHTML = giaBD.toLocaleString('it-IT')
+// uaDai.innerHTML = giaUaDai.toLocaleString("it-IT");
+// giaDonHang.innerHTML = tongGia.toLocaleString("it-IT")
+
+
+
+
+
+//  thay đổi tỉnh thành
+$(document).ready(function () {
+    let tinhThanhs = document.getElementById('tinhThanh');
+    let chonHuyens = document.getElementsByClassName('chonHuyen');
+    let showrooms = document.getElementById('showroom');
+
+    $('#tinhThanh').change(function () {
+        if (tinhThanhs.value == 'Hà Nội') {
+            $('.HCM').attr('style', 'display: none !important');
+            $('.HN').attr('style', 'display: block !important');
+        } else {
+            $('.HCM').attr('style', 'display: block !important');
+            $('.HN').attr('style', 'display: none !important');
+        }
+
+    })
+    //  còn nhiều trường hợp nữa
+    // $('.chonHuyen').change(function(){
+    //     if(chonHuyens.v =='Quận Long Biên'){
+    //         alert('jj')
+    //         $('.HCM01').attr('style','display: none !important');
+    //         $('.HN01').attr('style','display: block !important');
+    //     }
+    //     else{
+    //         alert('ê')
+    //         $('.HCM01').attr('style','display: block !important');
+    //         $('.HN01').attr('style','display: none !important');
+
+    //     }
+    // })
+
+    //  tùy từng mã mà giảm n tiền 
+    // nhưng giờ làm 1 cái mã đã rồi có thời gian phát triển tiếp
+
+
+})
 //  slie img
-
-
 let slideIndex = 1;
 showSlides(slideIndex);
 
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+    showSlides(slideIndex += n);
 }
 
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+    showSlides(slideIndex = n);
 }
 
 function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
 }
-// đóng slide img
