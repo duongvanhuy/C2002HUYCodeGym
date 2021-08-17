@@ -9,9 +9,7 @@ if (window.localStorage.getItem('checkDangNhap') == 1) {
     $('#checkDangNhaps').attr('style', 'display: none !important')
 
   })
-} else {
-  alert('pp');
-}
+} 
 $(document).ready(function () {
   var owl = $('.owl-carousel');
   owl.owlCarousel({
